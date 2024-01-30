@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://thymeleaf.org">
+    <head>
+        <title>Todo list</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="flex flex-col justify-center items-center p-10">
+        <p class="font-bold text-[20px] my-10">Add new todo</p>
+        <form action="#" th:action="@{/add}" method="POST" th:object="${todo}" class="flex flex-col items-start justify-center gap-3">
+            <label id="description" class="border-b font-semibold w-fit border-gray-300">Description</label>
+            <span th:if="${#fields.hasErrors('description')}" class="text-red-500 font-light text-[10px]">descrption is required</span>
+            <input th:field="*{description}" id="description" name="description" class="border-b border-gray-300 font-semibold w-[300px]"/>
+            <div class="flex gap-3">
+                <a th:href="@{/}" class="bg-blue-500 text-white font-semibold flex justify-center items-center p-1 rounded-md">go back</a>
+                <button class="bg-green-500 p-1 rounded-md text-white font-semibold">add todo</button>
+            </div>
+        </form>
+    </body>
+</html>

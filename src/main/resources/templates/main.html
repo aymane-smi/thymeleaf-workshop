@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://thymeleaf.org">
+    <head>
+        <title>Todo list</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="flex flex-col justify-center items-center p-10">
+        <p th:if="${#strings.equals(param.type, 'add')}" class="font-semibold text-green-500">new todo added</p>
+        <p th:if="${#strings.equals(param.type, 'delete')}" class="font-semibold text-red-500">todo deleted</p>
+        <p class="my-10 font-bold text-[20px]">List of available todos</p>
+        <a th:href="@{/add}" class="absolute right-1 top-2 p-3 bg-blue-500 text-white rounded-md">add new todo</a>
+        <div class="flex flex-col justify-center items-center gap-5">
+            <!-- header -->
+            <div class="flex justify-between items-center gap-6 bg-gray-500 rounded-md p-3 text-white">
+                <span class="font-semibold">ID</span>
+                <span class="font-semibold">Description</span>
+                <span class="font-semibold">Action</span>
+            </div>
+            <div th:each="todo : ${todos}" class="flex justify-between items-center gap-6 p-3">
+                <span th:text="${todo.id}" class="font-semibold"></span>
+                <span th:text="${todo.description}" class="font-semibold"></span>
+                <form action="#" method="POST" th:action="@{/delete/}+${todo.id}">
+                    <button class="font-semibold bg-red-500 rounded-md p-3 text-white">Delete</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
